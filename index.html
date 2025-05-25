@@ -28,7 +28,17 @@
       z-index: 2;
       animation: pop 1s ease-out;
       font-family: 'Century Gothic', sans-serif;
-
+    }
+    #start-btn {
+      margin-top: 20px;
+      font-size: 1em;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #2c3e50;
+      font-weight: bold;
+      cursor: pointer;
     }
     video {
       display: none;
@@ -63,12 +73,15 @@
   </style>
 </head>
 <body>
-  <div id="surprise-text"> Surprise??! 🎂🎉</div>
+  <div id="surprise-text">
+    Surprise??! 🎂🎉<br><br>
+    <button id="start-btn">let's be surprised! 🎬</button>
+  </div>
+
   <video id="bday-video" src="video.mp4" autoplay muted playsinline></video>
   <audio id="bg-music" src="music.mp3" autoplay loop></audio>
 
   <script>
-    // 🎊 تولد بمب اموجی
     const emojis = ["🎉", "🎂", "🎈", "✨", "🎁", "🥳", "❤️", "🪅", "🍬", "🕺"];
     for (let i = 0; i < 30; i++) {
       const span = document.createElement("span");
@@ -81,14 +94,14 @@
       document.body.appendChild(span);
     }
 
-    setTimeout(() => {
+    document.getElementById("start-btn").addEventListener("click", () => {
       document.getElementById("surprise-text").style.display = "none";
       const video = document.getElementById("bday-video");
       const audio = document.getElementById("bg-music");
       video.style.display = "block";
       video.play();
       audio.play();
-    }, 4000); // 4 ثانیه نمایش متن اولیه
+    });
   </script>
 </body>
 </html>
