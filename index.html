@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ??</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+    #surprise-text {
+      color: #fff;
+      font-size: 3em;
+      animation: pop 0.4s ease-out;
+    }
+    video {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+    audio {
+      display: none;
+    }
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="surprise-text">Surprise! ??</div>
+  <video id="bday-video" src="video.mp4" autoplay muted playsinline></video>
+  <audio id="bg-music" src="music.mp3" autoplay loop></audio>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("surprise-text").style.display = "none";
+      const video = document.getElementById("bday-video");
+      const audio = document.getElementById("bg-music");
+      video.style.display = "block";
+      video.play();
+      audio.play();
+    }, 1000);
+  </script>
+</body>
+</html>
