@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <title>Happy Birthday 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -12,21 +12,21 @@
       box-sizing: border-box;
     }
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       background: #2c3e50;
       overflow: hidden;
       font-family: sans-serif;
     }
     #surprise-text {
-  color: #fff;
-  font-size: 4em;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 2px;
-  animation: pop 0.4s ease-out;
-  text-transform: uppercase;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 3em;
+      letter-spacing: 1px;
+      text-align: center;
+      z-index: 2;
+      animation: pop 0.6s ease-out;
     }
     video {
       display: none;
@@ -37,19 +37,48 @@
     audio {
       display: none;
     }
+    .emoji {
+      position: absolute;
+      font-size: 2em;
+      animation: explode 3s ease-out forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      80% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
+      0% { transform: scale(0) translate(-50%, -50%); opacity: 0; }
+      80% { transform: scale(1.2) translate(-50%, -50%); opacity: 1; }
+      100% { transform: scale(1) translate(-50%, -50%); }
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-100px + 200px * var(--x)), calc(-100px + 200px * var(--y))) scale(0.5);
+      }
     }
   </style>
 </head>
 <body>
-  <div id="surprise-text">Surprise! 🎉</div>
+  <div id="surprise-text"> Surprise??! 🎂🎉</div>
   <video id="bday-video" src="video.mp4" autoplay muted playsinline></video>
   <audio id="bg-music" src="music.mp3" autoplay loop></audio>
 
   <script>
+    // 🎊 تولد بمب اموجی
+    const emojis = ["🎉", "🎂", "🎈", "✨", "🎁", "🥳", "❤️", "🪅", "🍬"];
+    for (let i = 0; i < 30; i++) {
+      const span = document.createElement("span");
+      span.className = "emoji";
+      span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.top = Math.random() * 100 + "vh";
+      span.style.setProperty('--x', Math.random());
+      span.style.setProperty('--y', Math.random());
+      document.body.appendChild(span);
+    }
+
     setTimeout(() => {
       document.getElementById("surprise-text").style.display = "none";
       const video = document.getElementById("bday-video");
@@ -57,7 +86,7 @@
       video.style.display = "block";
       video.play();
       audio.play();
-    }, 1000);
+    }, 4000); // 4 ثانیه نمایش متن اولیه
   </script>
 </body>
 </html>
